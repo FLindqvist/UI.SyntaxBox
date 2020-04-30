@@ -1,0 +1,45 @@
+[
+  {
+    "Op": "Line",
+    "Pattern": "\\btest\\b",
+    "Foreground": "Blue",
+    "Outline": "Blue",
+    "Background": "AliceBlue"
+  },
+  {
+    "Op": "Line",
+    "Foreground": "Blue",
+    "Pattern": "abstract\\b|\\bas\\b|\\bbase\\b|\\bbool\\b|\\bbreak\\b|\\bbyte\\b|\\bcase\\b|\\bcatch\\b|\\bchar\\b|\\bchecked\\b|\\bclass\\b|\\bconst\\b|\\bcontinue\\b|\\bdecimal\\b|\\bdefault\\b|\\bdelegate\\b|\\bdo\\b|\\bdouble\\b|\\belse\\b|\\benum\\b|\\bevent\\b|\\bexplicit\\b|\\bextern\\b|\\bfalse\\b|\\bfinally\\b|\\bfixed\\b|\\bfloat\\b|\\bfor\\b|\\bforeach\\b|\\bgoto\\b|\\bif\\b|\\bimplicit\\b|\\bin\\b|\\bint\\b|\\binterface\\b|\\binternal\\b|\\bis\\b|\\block\\b|\\blong\\b|\\bnamespace\\b|\\bnew\\b|\\bnull\\b|\\bobject\\b|\\boperator\\b|\\bout\\b|\\boverride\\b|\\bparams\\b|\\bprivate\\b|\\bprotected\\b|\\bpublic\\b|\\breadonly\\b|\\bref\\b|\\breturn\\b|\\bsbyte\\b|\\bsealed\\b|\\bshort\\b|\\bsizeof\\b|\\bstackalloc\\b|\\bstatic\\b|\\bstring\\b|\\bstruct\\b|\\bswitch\\b|\\bthis\\b|\\bthrow\\b|\\btrue\\b|\\btry\\b|\\btypeof\\b|\\buint\\b|\\bulong\\b|\\bunchecked\\b|\\bunsafe\\b|\\bushort\\b|\\busing\\b|\\busing\\b|\\bstatic\\b|\\bvirtual\\b|\\bvoid\\b|\\bvolatile\\b|\\bwhile\\b|\\bget\\b|\\bset\\b|\\byield\\b|\\bvar\\b"
+  },
+  {
+    "Op": "Line",
+    "Pattern": "[+\\-\\/\\*%=&\\^|]|<=|>=",
+    "Foreground": "Blue"
+  },
+  {
+    "Op": "Line",
+    "Foreground": "Gray",
+    "Pattern": "^\\s*#.*"
+  },
+  {
+    "Op": "Line",
+    "Foreground": "Maroon",
+    "Pattern": "\"(?:[^\"\\\\]|\\\\.)*\""
+  },
+  {
+    "Op": "Block",
+    "Foreground": "Maroon",
+    "Pattern": "@\"(?:[^\"])*\""
+  },
+  {
+    "Op": "Line",
+    "Foreground": "Green",
+    "Pattern": "//.*"
+  },
+  {
+    "Op": "Block",
+    "Foreground": "Green",
+    "Pattern": "(?m)\\/\\*[^*]*\\*+(?:[^\\/*][^*]*\\*+)*\\/"
+  }
+]
+
