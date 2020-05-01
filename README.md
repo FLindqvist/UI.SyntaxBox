@@ -6,6 +6,7 @@ It supports two distinct rule types for syntax syntax recognition, RegexRule and
 
 Here an example of using the SyntaxBox for syntax highlighting ofsomething approximating C# code:
 
+```xaml
 // xmlns:syntax="clr-namespace:UI.SyntaxBox;assembly=UI.SyntaxBox"
 // ...
 <TextBox 
