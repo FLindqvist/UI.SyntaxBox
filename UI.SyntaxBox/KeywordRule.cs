@@ -10,10 +10,8 @@ namespace UI.SyntaxBox
     /// This rule is used to match a list of keywords wit input text.
     /// It is ~10x faster than using regex for the same purpose.
     /// </summary>
-    public class KeywordRule : 
-        ISyntaxRule
+    public class KeywordRule : ISyntaxRule
     {
-        private string _keywords;
         private AhoCorasickSearch _engine = null;
 
         #region ISyntaxRule members

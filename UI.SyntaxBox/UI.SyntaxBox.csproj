@@ -57,10 +57,10 @@
   <ItemGroup>
     <Compile Include="AggregateSyntaxDriver.cs" />
     <Compile Include="AhoCorasickSearch.cs" />
-    <Compile Include="BoyerMooreSearch.cs" />
     <Compile Include="FormattedLine.cs" />
     <Compile Include="ISyntaxDriver.cs" />
     <Compile Include="ISyntaxRule.cs" />
+    <Compile Include="KeySequence.cs" />
     <Compile Include="KeywordRule.cs" />
     <Compile Include="LineBuffer.cs" />
     <Compile Include="MatchUtils.cs" />
@@ -99,7 +99,6 @@
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
-    <EmbeddedResource Include="SyntaxConfigs\CSharp.json" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

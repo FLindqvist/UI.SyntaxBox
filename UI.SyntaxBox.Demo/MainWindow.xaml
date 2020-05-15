@@ -4,8 +4,9 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:syntax="clr-namespace:UI.SyntaxBox;assembly=UI.SyntaxBox"
+        xmlns:local="clr-namespace:UI.SyntaxBox.Demo"
         mc:Ignorable="d"
-        Title="SyntaxBox Demo" Height="450" Width="800">
+        Title="C# Editor" Height="450" Width="800">
     <Grid Background="LightGray" >
         <DockPanel >
             <Button Click="Button_Click" Content="Toggle" DockPanel.Dock="Bottom"/>
@@ -56,6 +57,16 @@
 
                     </syntax:SyntaxConfig>
                 </syntax:SyntaxBox.SyntaxDrivers>
+                
+                <!-- Install multi-key bindings for comment/uncomment block -->
+                <TextBox.CommandBindings>
+                    <CommandBinding Command="local:Commands.CommentCommand" Executed="OnCommentCommand" />
+                    <CommandBinding Command="local:Commands.UncommentCommand" Executed="OnUncommentCommand" />
+                </TextBox.CommandBindings>
+                <TextBox.InputBindings>
+                    <syntax:KeySequenceBinding Gesture="Ctrl+K,C" Command="local:Commands.CommentCommand" />
+                    <syntax:KeySequenceBinding Gesture="Ctrl+K,U" Command="local:Commands.UncommentCommand" />
+                </TextBox.InputBindings>
             </TextBox>
 
         </DockPanel>
