@@ -42,7 +42,10 @@ namespace UI.SyntaxBox.Demo
                     return (i);
                 }
             }
-            return (Line.Text.Length);
+            if (Line.Text.EndsWith(Environment.NewLine))
+                return (Line.Text.Length - Environment.NewLine.Length);
+            else
+                return (Line.Text.Length);
         }
         // ...................................................................
         #endregion
@@ -75,7 +78,7 @@ namespace UI.SyntaxBox.Demo
             int selEndOffset = affectedLines[affectedLines.Count - 1].EndIndex - selEnd;
 
             // Find the smallest line start among the affected lines.
-            // THis is where we'll throw in the line comments.
+            // This is where we'll throw in the line comments.
             int insPos = affectedLines
                 .Select(FindLineStart)
                 .Min();
