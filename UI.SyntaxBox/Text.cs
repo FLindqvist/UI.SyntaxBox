@@ -121,7 +121,8 @@ namespace UI.SyntaxBox
         /// <summary>
         /// Parses the text returning a chunk of lines as TextLines starting at
         /// First line and ending on Last line or at the end of the text.
-        /// This can be done using built-in TextBox functions, but this is >5x faster.
+        /// This is the same as GetLines, but uses the Aho-Corasick algorithm,
+        /// which makes it a bit slower.
         /// </summary>
         /// <param name="Text">The text to parse.</param>
         /// <param name="First">The first line to include in the chunk.</param>
