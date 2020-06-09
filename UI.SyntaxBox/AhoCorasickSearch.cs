@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -222,7 +223,7 @@ namespace UI.SyntaxBox
         /// <param name="CurrentState"></param>
         /// <param name="InputChar"></param>
         /// <returns></returns>
-        private int NextState(int CurrentState, char InputChar)
+        private int NextState(int CurrentState, int InputChar)
         {
             int current = CurrentState;
             while (this._goto[current][InputChar] == -1)
@@ -268,8 +269,6 @@ namespace UI.SyntaxBox
                                 || Text.IsStartWordBoundary(firstChar)
                                 && Text.IsEndWordBoundary(i))
                             {
-                                System.Diagnostics.Debug.WriteLine($"{this._dictionary[j]} {firstChar} + {length}");
-
                                 var substring = new Substring
                                     {
                                         Position = firstChar,
@@ -279,7 +278,6 @@ namespace UI.SyntaxBox
                                 if (this._overlappingMatches)
                                 {
                                     yield return substring;
-                                    
                                 }
                                 else
                                 {

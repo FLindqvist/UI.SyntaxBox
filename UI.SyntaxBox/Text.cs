@@ -11,8 +11,9 @@ namespace UI.SyntaxBox
     /// </summary>
     public static class Text
     {
-        static readonly int _nlen = Environment.NewLine.Length;
-        static readonly char _nlhint = Environment.NewLine[0];
+        static readonly AhoCorasickSearch _search = new AhoCorasickSearch(
+                new List<string> { "\r\n", "\n" },
+                false);
 
         // ...................................................................
         /// <summary>
@@ -26,7 +27,7 @@ namespace UI.SyntaxBox
         {
             if (Text == null || Position < 0 || Position > Text.Length)
                 return (null);
-            string nlstr = Environment.NewLine;
+            string nlstr = Environment.NewLine.Last().ToString();
             int nlen = nlstr.Length;
             char nl = nlstr[0];
 
@@ -79,30 +80,84 @@ namespace UI.SyntaxBox
         {
             string nlstr = Environment.NewLine;
             int nlen = nlstr.Length;
-            char nl = nlstr[0];
+            char nl = nlstr[nlen-1];
 
             List<TextLine> lines = new List<TextLine>(Math.Min(1000, Last - First));
             int start = 0;
             int foundNewlines = 0;
             for (int i = 0; i < Text.Length; i++)
             {
-                if (Text[i] == nl && (nlen == 1 || Text.Length > i + 1 && Text[i + 1] == nlstr[1]))
+                if (Text[i] == nl)
                 {
                     if (foundNewlines >= First && foundNewlines <= Last)
                     {
                         TextLine line = new TextLine
                         {
-                            Text = Text.Substring(start, i + nlen - start),
+                            Text = Text.Substring(start, i +1 - start),
                             StartIndex = start,
                             LineNumber = foundNewlines
                         };
                         lines.Add(line);
                     }
-                    
+
                     foundNewlines++;
-                    start = i + nlstr.Length;
+                    start = i + 1;
                 }
             }
+            if (start <= Text.Length && foundNewlines >= First && foundNewlines <= Last)
+            {
+                TextLine tailLine = new TextLine
+                {
+                    Text = Text.Substring(start),
+                    StartIndex = start,
+                    LineNumber = foundNewlines
+                };
+                lines.Add(tailLine);
+            }
+            TotalLines = foundNewlines + 1;
+            return (lines);
+        }
+        // ...................................................................
+        /// <summary>
+        /// Parses the text returning a chunk of lines as TextLines starting at
+        /// First line and ending on Last line or at the end of the text.
+        /// This can be done using built-in TextBox functions, but this is >5x faster.
+        /// </summary>
+        /// <param name="Text">The text to parse.</param>
+        /// <param name="First">The first line to include in the chunk.</param>
+        /// <param name="Last">The last line to include in the chunk.</param>
+        /// <returns></returns>
+        public static List<TextLine> GetLines2(this string Text, int First, int Last, out int TotalLines)
+        {
+            string nlstr = Environment.NewLine;
+            int nlen = nlstr.Length;
+            char nl = nlstr[0];
+
+            List<TextLine> lines = new List<TextLine>(Math.Min(1000, Last - First));
+            int start = 0;
+            int foundNewlines = 0;
+
+            var matches = _search.FindAll(Text)
+                .OrderBy((x) => x.Position)
+                .ToList();
+
+            foreach (var nwln in matches)
+            {
+                if (foundNewlines >= First && foundNewlines <= Last)
+                {
+                    TextLine line = new TextLine
+                    {
+                        Text = Text.Substring(start, nwln.Position + nwln.Length - start),
+                        StartIndex = start,
+                        LineNumber = foundNewlines
+                    };
+                    lines.Add(line);
+                }
+
+                foundNewlines++;
+                start = nwln.Position + nwln.Length;
+            }
+
             if (start <= Text.Length && foundNewlines >= First && foundNewlines <= Last)
             {
                 TextLine tailLine = new TextLine

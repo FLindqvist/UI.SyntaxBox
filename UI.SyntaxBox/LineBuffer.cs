@@ -115,7 +115,7 @@ namespace UI.SyntaxBox
 
                 // Merge with next line
                 if (currentLine < this.Count - 1
-                    && !this[currentLine].Text.EndsWith(Environment.NewLine))
+                    && !this[currentLine].Text.EndsWith(Environment.NewLine.Last().ToString()))
                 {
                     prevLine = this[currentLine].Text.Length;
                     this[currentLine + 1].Text = this[currentLine].Text + this[currentLine + 1].Text;
